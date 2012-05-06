@@ -345,7 +345,7 @@ ${WRKDIR}/.config_done:
 .endif
 .if defined(TRUSTED)
 	@echo 'security.mac.biba.trust_all_interfaces=1' >> ${_DESTDIR}/boot/loader.conf
-	@{CAT} ${TOOLSDIR}/trustedbsd/mac.conf > ${_DESTDIR}/etc/mac.conf
+	@${CAT} ${TOOLSDIR}/trustedbsd/mac.conf > ${_DESTDIR}/etc/mac.conf
 .endif
 	@if [ -f "${CFGDIR}/resolv.conf" ]; then \
 		${INSTALL} -m 0644 ${CFGDIR}/resolv.conf ${_DESTDIR}/etc/resolv.conf; \

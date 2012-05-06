@@ -344,6 +344,7 @@ ${WRKDIR}/.config_done:
 	@echo 'root_rw_mount="NO"' >> ${_DESTDIR}/etc/rc.conf
 .endif
 .if defined(TRUSTED)
+	@echo 'security.mac.biba.trust_all_interfaces=1' >> ${_DESTDIR}/boot/loader.conf
 	@{CAT} ${TOOLSDIR}/trustedbsd/mac.conf > ${_DESTDIR}/etc/mac.conf
 .endif
 	@if [ -f "${CFGDIR}/resolv.conf" ]; then \

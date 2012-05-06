@@ -95,11 +95,11 @@ RELEASE!=${UNAME} -r
 
 .if !defined(SE)
 IMAGE_PREFIX?= mfsbsd
-.else 
+.else
 IMAGE_PREFIX?= mfsbsd-se
 .endif
 .if defined(TRUSTED)
-IMAGE_PREFIX?= trusted-${IMAGE_PREFIX}
+IMAGE_PREFIX?= trusted-mfsbsd
 .endif
 
 IMAGE?=	${IMAGE_PREFIX}-${RELEASE}-${TARGET}.img
@@ -154,7 +154,7 @@ _BOOTDIR=	${_ROOTDIR}/boot
 _DESTDIR=	${_ROOTDIR}/rw
 WITHOUT_RESCUE=1
 MFSROOT_FREE_INODES=1%
-mFSROOT_FREE_BLOCKS=1%
+MFSROOT_FREE_BLOCKS=1%
 .else
 _DESTDIR=	${_ROOTDIR}
 .endif

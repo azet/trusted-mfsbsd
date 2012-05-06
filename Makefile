@@ -223,7 +223,7 @@ ${WRKDIR}/.build_done:
 .if defined(CUSTOM)
 . if defined(TRUSTED)
 	@echo "Creating kernel conf. with TrustedBSD, PF and DTrace support KERNCONF=${KERNCONF} ..."
-	@${CAT} ${TOOLSDIR}/${CFGDIR}/TRUSTED.kernel > ${SRC_DIR}/sys/${TARGET}/conf/${KERNCONF} && \
+	@${CAT} ${TOOLSDIR}/trustedbsd/TRUSTED.kernel > ${SRC_DIR}/sys/${TARGET}/conf/${KERNCONF} && \
         ${CAT} ${SRC_DIR}/sys/${TARGET}/conf/GENERIC >> ${SRC_DIR}/sys/${TARGET}/conf/${KERNCONF} 
 . endif
 . if defined(BUILDKERNEL)

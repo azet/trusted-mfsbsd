@@ -344,9 +344,7 @@ ${WRKDIR}/.config_done:
 	@echo 'root_rw_mount="NO"' >> ${_DESTDIR}/etc/rc.conf
 .endif
 .if defined(TRUSTED)
-	@echo 'default_labels file ?biba\ndefault_labels ifnet ?biba\n \
-	default_labels process ?biba\ndefault_labels socket ?biba' > ${_DESTDIR}/etc/mac.conf
-	@echo 'security.mac.biba.trust_all_interfaces=1' >> ${_DESTDIR}/boot/loader.conf
+	@{CAT} ${TOOLSDIR}/trustedbsd/mac.conf > ${_DESTDIR}/etc/mac.conf
 .endif
 	@if [ -f "${CFGDIR}/resolv.conf" ]; then \
 		${INSTALL} -m 0644 ${CFGDIR}/resolv.conf ${_DESTDIR}/etc/resolv.conf; \

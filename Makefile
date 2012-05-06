@@ -99,7 +99,7 @@ IMAGE_PREFIX?= mfsbsd
 IMAGE_PREFIX?= mfsbsd-se
 .endif
 .if defined(TRUSTED)
-IMAGE_PREFIX?= trusted-mfsbsd
+IMAGE_PREFIX= trusted-mfsbsd
 .endif
 
 IMAGE?=	${IMAGE_PREFIX}-${RELEASE}-${TARGET}.img

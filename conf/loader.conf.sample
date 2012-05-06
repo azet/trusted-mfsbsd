@@ -50,3 +50,8 @@ mfs_name="/mfsroot"
 ahci_load="YES"
 vfs.root.mountfrom="ufs:/dev/md0"
 mfsbsd.autodhcp="YES"
+
+#trustedbsd config (change this to boot with debug & working network/dhcp config)
+#security.mac.biba.trust_all_interfaces="1"
+#debug.bootverbose="1"
+#hw.acpi.verbose="1"

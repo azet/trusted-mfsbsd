@@ -10,7 +10,11 @@
 # User-defined variables
 #
 BASE?=/cdrom/usr/freebsd-dist
+.if defined(TRUSTED)
+KERNCONF?= TRUSTED
+.else
 KERNCONF?= GENERIC
+.endif
 MFSROOT_FREE_INODES?=10%
 MFSROOT_FREE_BLOCKS?=10%
 MFSROOT_MAXSIZE?=64m
@@ -90,9 +94,12 @@ RELEASE!=${UNAME} -r
 .endif
 
 .if !defined(SE)
-IMAGE_PREFIX?=	mfsbsd
-.else
-IMAGE_PREFIX?=	mfsbsd-se
+IMAGE_PREFIX?= mfsbsd
+.else 
+IMAGE_PREFIX?= mfsbsd-se
+.endif
+.if defined(TRUSTED)
+IMAGE_PREFIX?= trusted-${IMAGE_PREFIX}
 .endif
 
 IMAGE?=	${IMAGE_PREFIX}-${RELEASE}-${TARGET}.img
@@ -147,7 +154,7 @@ _BOOTDIR=	${_ROOTDIR}/boot
 _DESTDIR=	${_ROOTDIR}/rw
 WITHOUT_RESCUE=1
 MFSROOT_FREE_INODES=1%
-MFSROOT_FREE_BLOCKS=1%
+mFSROOT_FREE_BLOCKS=1%
 .else
 _DESTDIR=	${_ROOTDIR}
 .endif
@@ -214,6 +221,11 @@ ${WRKDIR}/.extract_done:
 build: extract ${WRKDIR}/.build_done
 ${WRKDIR}/.build_done:
 .if defined(CUSTOM)
+. if defined(TRUSTED)
+	@echo "Creating kernel conf. with TrustedBSD, PF and DTrace support KERNCONF=${KERNCONF} ..."
+	@${CAT} ${TOOLSDIR}/${CFGDIR}/TRUSTED.kernel > ${SRC_DIR}/sys/${TARGET}/conf/${KERNCONF} && \
+        ${CAT} ${SRC_DIR}/sys/${TARGET}/conf/GENERIC >> ${SRC_DIR}/sys/${TARGET}/conf/${KERNCONF} 
+. endif
 . if defined(BUILDKERNEL)
 	@echo -n "Building kernel KERNCONF=${KERNCONF} ..."
 	@cd ${SRC_DIR} && make buildkernel KERNCONF=${KERNCONF} TARGET=${TARGET}

@@ -1,0 +1,48 @@
+#######################################################
+# trusted mfsbsd kernel config @ FreeBSD 9.0 RELEASE
+# - azet@azet.org - github.com/azet
+# - Wed May 2 2012
+#######################################################
+#packet filter (http://www.openbsd.org/faq/pf/) & ALTQ
+device pf
+device pflog
+device pfsync
+
+options         ALTQ
+options         ALTQ_CBQ        # Class Bases Queuing (CBQ)
+options         ALTQ_RED        # Random Early Detection (RED)
+options         ALTQ_RIO        # RED In/Out
+options         ALTQ_HFSC       # Hierarchical Packet Scheduler (HFSC)
+options         ALTQ_PRIQ       # Priority Queuing (PRIQ)
+options         ALTQ_NOPCC      # SMP support
+
+
+#trusted bsd extensions (http://www.trustedbsd.org/docs.html)
+options MAC
+options MAC_SEEOTHERUIDS
+options MAC_BSDEXTENDED
+options MAC_IFOFF
+options MAC_PORTACL
+options MAC_PARTITION
+options MAC_MLS
+options MAC_LOMAC
+options MAC_BIBA
+
+options AUDIT
+options UFS_ACL
+#..see: http://www.freebsd.org/doc/handbook/mac.html
+
+
+#dynamic tracing support (http://wiki.freebsd.org/DTrace)
+options KDTRACE_HOOKS        # all architectures - enable general DTrace hooks
+options DDB_CTF              # all architectures - kernel ELF linker loads CTF data
+options KDTRACE_FRAME        # amd64 - ensure frames are compiled in
+makeoptions DEBUG="-g"       # amd64? - build kernel with gdb(1) debug symbols
+makeoptions WITH_CTF=1
+
+
+#increase NKPT (for ~8GB phys. MEM)
+options NKPT="120"
+
+
+####

@@ -469,7 +469,7 @@ ${WRKDIR}/.mfsroot_done:
 	@${RM} -rf ${WRKDIR}/mnt ${_DESTDIR}
 	@${GZIP} -9 -f ${WRKDIR}/disk/mfsroot
 	@${GZIP} -9 -f ${WRKDIR}/disk/boot/kernel/kernel
-	@if [ -f "${CFGDIR}/loader.conf" ]; then \		
+	@if [ -f "${CFGDIR}/loader.conf" ]; then \
 		${INSTALL} -m 0644 ${CFGDIR}/loader.conf ${WRKDIR}/disk/boot/loader.conf; \
 	else \
 		${INSTALL} -m 0644 ${CFGDIR}/loader.conf.sample ${WRKDIR}/disk/boot/loader.conf; \

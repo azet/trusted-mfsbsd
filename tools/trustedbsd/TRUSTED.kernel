@@ -18,7 +18,6 @@ options         ALTQ_NOPCC      # SMP support
 
 
 #trusted bsd extensions (http://www.trustedbsd.org/docs.html)
-options MAC
 options MAC_SEEOTHERUIDS
 options MAC_BSDEXTENDED
 options MAC_IFOFF
@@ -28,16 +27,11 @@ options MAC_MLS
 options MAC_LOMAC
 options MAC_BIBA
 
-options AUDIT
-options UFS_ACL
-#..see: http://www.freebsd.org/doc/handbook/mac.html
-
 
 #dynamic tracing support (http://wiki.freebsd.org/DTrace)
 options KDTRACE_HOOKS        # all architectures - enable general DTrace hooks
 options DDB_CTF              # all architectures - kernel ELF linker loads CTF data
 options KDTRACE_FRAME        # amd64 - ensure frames are compiled in
-makeoptions DEBUG="-g"       # amd64? - build kernel with gdb(1) debug symbols
 makeoptions WITH_CTF=1
 
 
